@@ -67,6 +67,10 @@ class ProfileCollection extends BaseCollection {
     Interests.assertNames(interests);
     return this._collection.insert({ firstName, lastName, username, bio, interests, picture, title, github,
       facebook, instagram });
+
+    if (interests.length !== _.uniq(interests).length) {
+      throw new Meteor.Error('List of Interests contains duplicates');
+    }
   }
 
   /**
